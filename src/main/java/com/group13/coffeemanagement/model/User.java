@@ -8,7 +8,7 @@ public class User implements Comparable<User> {
 
     private String name;
     private Integer userId; // UNIQUE //optimize search nhanh hơn nếu dùng với binary tree...
-    private String username;  // UNIQUE
+    private String username; // UNIQUE
     private String passwordHash;
     private UserRole role = UserRole.NHANVIEN;
 
@@ -51,6 +51,14 @@ public class User implements Comparable<User> {
         this.userId = userId;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
     @Override
     public int compareTo(User other) {
 
@@ -65,14 +73,13 @@ public class User implements Comparable<User> {
 
         try {
             String rawPassword = AESCryptography.decryptPassword(this.passwordHash);
-            
+
             System.out.println("RAW: " + rawPassword);
-            
 
             if (rawPassword.equals(password)) {
                 return true;
             }
-            
+
         } catch (Exception e) {
         }
 

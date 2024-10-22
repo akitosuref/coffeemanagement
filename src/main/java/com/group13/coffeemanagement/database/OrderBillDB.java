@@ -3,20 +3,19 @@ package com.group13.coffeemanagement.database;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.group13.coffeemanagement.Gson_LocalDateTimeTypeAdapter;
 import com.group13.coffeemanagement.model.*;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.time.LocalDateTime;
 
 public class OrderBillDB {
     public static List<Bill> bills = new ArrayList<>();
     public static List<Order> orders = new ArrayList<>();
 
     private static final String FILE_PATH = "order_bill.json";
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class , new Gson_LocalDateTimeTypeAdapter() ).setPrettyPrinting().create();
 
     private OrderBillDB() {
     }
