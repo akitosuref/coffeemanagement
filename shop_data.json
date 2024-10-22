@@ -47,6 +47,12 @@
       "name": "Bánh Mì Nhân Thịt",
       "price": 30000,
       "categoryId": 3
+    },
+    {
+      "id": 7,
+      "name": "T1",
+      "price": 100000,
+      "categoryId": 2
     }
   ],
   "categories": [

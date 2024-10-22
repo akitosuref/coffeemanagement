@@ -1,6 +1,7 @@
 
 package com.group13.coffeemanagement.model;
 
+import com.group13.coffeemanagement.database.ShopDB;
 
 public class Food {
     private int id;
@@ -12,6 +13,9 @@ public class Food {
         this.name = name;
         this.price = price;
         this.categoryId = categoryId;
+    }
+
+    public Food() {
     }
 
     public int getId() {
@@ -44,6 +48,24 @@ public class Food {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Category getCategory() {
+        for (Category category : ShopDB.categories) {
+            if (category.getId() == categoryId) {
+                return category;
+            }
+        }
+        return null;
+    }
+
+    public String getCategoryName() {
+        return getCategory().getName();
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" + "id=" + id + ", name='" + name + '\'' + ", price=" + price + ", categoryId=" + categoryId + '}';
     }
     
 }
