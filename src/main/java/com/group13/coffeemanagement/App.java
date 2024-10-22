@@ -1,12 +1,7 @@
 package com.group13.coffeemanagement;
 
-import com.group13.coffeemanagement.crypto.AESCryptography;
-import com.group13.coffeemanagement.database.OrderBillDB;
-import com.group13.coffeemanagement.database.ShopDB;
-import com.group13.coffeemanagement.database.UserDB;
-import com.group13.coffeemanagement.enums.TableStatus;
-import com.group13.coffeemanagement.model.Table;
-import com.group13.coffeemanagement.model.User;
+import com.group13.coffeemanagement.database.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,11 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.Base64;
-import java.util.Locale;
-import javax.crypto.SecretKey;
+
 
 /**
  * JavaFX App
@@ -45,6 +36,10 @@ public class App extends Application {
                 scene.getWindow().setHeight(400);
                 break;
             case "mainScreen":
+                scene.getWindow().setWidth(1000);
+                scene.getWindow().setHeight(650);
+                break;
+            case "adminScreen":
                 scene.getWindow().setWidth(1000);
                 scene.getWindow().setHeight(650);
                 break;

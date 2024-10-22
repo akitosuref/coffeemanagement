@@ -6,7 +6,17 @@
       "disCount": 0,
       "paid": true,
       "orderDate": "2024-10-22T15:16:00",
-      "totalPrice": 0
+      "paidDate": "2024-10-22T15:16:00",
+      "totalPrice": 30000
+    },
+    {
+      "id": 2,
+      "tableID": 1,
+      "disCount": 0,
+      "paid": true,
+      "orderDate": "2024-10-22T16:58:17",
+      "paidDate": "2024-10-22T16:58:22",
+      "totalPrice": 60000
     }
   ],
   "orders": [
@@ -15,6 +25,12 @@
       "billID": 1,
       "foodID": 1,
       "count": 1
+    },
+    {
+      "id": 2,
+      "billID": 2,
+      "foodID": 6,
+      "count": 2
     }
   ]
 }

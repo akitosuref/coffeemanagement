@@ -11,6 +11,7 @@ public class Bill {
     private int disCount;
     private boolean paid;
     private LocalDateTime orderDate;
+    private LocalDateTime paidDate;
     private long totalPrice;
 
     public Bill() {
@@ -18,6 +19,14 @@ public class Bill {
         orderDate = LocalDateTime.now();
         paid = false;
 
+    }
+
+    public LocalDateTime getPaidDate() {
+        return paidDate;
+    }
+
+    public void setPaidDate(LocalDateTime paidDate) {
+        this.paidDate = paidDate;
     }
 
     public LocalDateTime getOrderDate() {
