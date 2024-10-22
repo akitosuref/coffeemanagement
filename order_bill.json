@@ -1,0 +1,102 @@
+{
+  "bills": [
+    {
+      "id": 1,
+      "tableID": 1,
+      "disCount": 0,
+      "paid": true,
+      "totalPrice": 0
+    },
+    {
+      "id": 2,
+      "tableID": 2,
+      "disCount": 0,
+      "paid": true,
+      "totalPrice": 0
+    },
+    {
+      "id": 3,
+      "tableID": 1,
+      "disCount": 0,
+      "paid": true,
+      "totalPrice": 0
+    },
+    {
+      "id": 4,
+      "tableID": 2,
+      "disCount": 0,
+      "paid": true,
+      "totalPrice": 0
+    },
+    {
+      "id": 5,
+      "tableID": 1,
+      "disCount": 0,
+      "paid": true,
+      "totalPrice": 0
+    },
+    {
+      "id": 6,
+      "tableID": 1,
+      "disCount": 0,
+      "paid": true,
+      "totalPrice": 0
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "billID": 1,
+      "foodID": 1,
+      "count": 1
+    },
+    {
+      "id": 2,
+      "billID": 2,
+      "foodID": 2,
+      "count": 1
+    },
+    {
+      "id": 3,
+      "billID": 3,
+      "foodID": 6,
+      "count": 4
+    },
+    {
+      "id": 4,
+      "billID": 4,
+      "foodID": 4,
+      "count": 1
+    },
+    {
+      "id": 5,
+      "billID": 5,
+      "foodID": 3,
+      "count": 1
+    },
+    {
+      "id": 6,
+      "billID": 5,
+      "foodID": 6,
+      "count": 1
+    },
+    {
+      "id": 7,
+      "billID": 6,
+      "foodID": 2,
+      "count": 1
+    },
+    {
+      "id": 8,
+      "billID": 6,
+      "foodID": 2,
+      "count": 1
+    },
+    {
+      "id": 9,
+      "billID": 6,
+      "foodID": 4,
+      "count": 1
+    }
+  ]
+}

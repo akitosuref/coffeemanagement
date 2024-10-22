@@ -1,0 +1,66 @@
+{
+  "tables": [
+    {
+      "id": 1,
+      "name": "Bàn 1",
+      "status": "NO_USE"
+    },
+    {
+      "id": 2,
+      "name": "Bàn 2",
+      "status": "NO_USE"
+    }
+  ],
+  "foods": [
+    {
+      "id": 1,
+      "name": "Cà Phê Đen",
+      "price": 30000,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Cà Phê Sữa",
+      "price": 35000,
+      "categoryId": 1
+    },
+    {
+      "id": 3,
+      "name": "Trà Sữa Trân Châu",
+      "price": 40000,
+      "categoryId": 2
+    },
+    {
+      "id": 4,
+      "name": "Trà Chanh",
+      "price": 25000,
+      "categoryId": 2
+    },
+    {
+      "id": 5,
+      "name": "Bánh Croissant",
+      "price": 20000,
+      "categoryId": 3
+    },
+    {
+      "id": 6,
+      "name": "Bánh Mì Nhân Thịt",
+      "price": 30000,
+      "categoryId": 3
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cà Phê"
+    },
+    {
+      "id": 2,
+      "name": "Trà"
+    },
+    {
+      "id": 3,
+      "name": "Bánh Ngọt"
+    }
+  ]
+}
