@@ -1,6 +1,7 @@
 package com.group13.coffeemanagement.controller;
 
 import com.group13.coffeemanagement.App;
+import com.group13.coffeemanagement.crypto.AESCryptography;
 import com.group13.coffeemanagement.database.*;
 import com.group13.coffeemanagement.model.*;
 
@@ -116,6 +117,46 @@ public class AdminController {
     @FXML
     private TextField tableNameField;
 
+    // Account Tab
+    @FXML
+    private TextField searchAccountField;
+
+    @FXML
+    private TableView<User> accountTableView;
+
+    @FXML
+    private TableColumn<User, Integer> accountIdCol;
+
+    @FXML
+    private TableColumn<User, String> accountNameCol;
+
+    @FXML
+    private TableColumn<User, String> accountUserNameCol;
+
+    @FXML
+    private TableColumn<User, String> accountRoleCol;
+
+    @FXML
+    private TextField accountIdField;
+
+    @FXML
+    private TextField accountUserNameField;
+
+    @FXML
+    private TextField accountNameField;
+
+    @FXML
+    private TextField passwordField;
+
+    @FXML
+    private Button togglePass;
+
+    private boolean isPasswordVisible = false; // Track password visibility
+    private String actualPassword = ""; // Store the real password
+
+    @FXML
+    private Button saveAccountButton;
+
     @FXML
     private Label messageUpdateDB;
 
@@ -193,7 +234,6 @@ public class AdminController {
         tableNameCol2
                 .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
-
         tableStatusCol
                 .setCellValueFactory(cellData -> {
                     String statusText;
@@ -219,6 +259,33 @@ public class AdminController {
                 populateTableFields(newSelection);
             }
         });
+
+        loadAccounts();
+
+        // Account code
+
+        accountIdCol
+                .setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserId()).asObject());
+
+        accountNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+        accountUserNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+
+        accountRoleCol
+                .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole().toString()));
+
+        accountTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                messageUpdateDB.setText("");
+                try {
+                    populateAccountFields(newSelection);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        saveAccountButton.setDisable(true);
 
     }
 
@@ -457,8 +524,9 @@ public class AdminController {
     }
 
     @FXML
-    private void saveShopDB() {
+    private void saveDB() {
         ShopDB.saveShopDB();
+        UserDB.saveUserDB();
         messageUpdateDB.setText("Cơ sở dữ liệu đã được lưu.");
     }
     // #endregion
@@ -556,6 +624,119 @@ public class AdminController {
         if (selectedTable != null) {
             selectedTable.setName(tableNameField.getText());
             loadTables();
+        }
+    }
+
+    // #endregion
+
+    // #region Account
+
+    @FXML
+    private void handleTogglePass() {
+        if (isPasswordVisible) {
+            actualPassword = passwordField.getText();
+            passwordField.setText(maskPassword(actualPassword));
+            togglePass.setText("Show");
+            isPasswordVisible = false;
+            saveAccountButton.setDisable(true);
+        } else {
+            passwordField.setText(actualPassword);
+            togglePass.setText("Hide");
+            isPasswordVisible = true;
+            saveAccountButton.setDisable(false);
+        }
+    }
+
+    private String maskPassword(String password) {
+        return "*".repeat(password.length()); // Replace each character with '*'
+    }
+
+    private void populateAccountFields(User account) throws Exception {
+        accountIdField.setText(String.valueOf(account.getUserId()));
+        accountUserNameField.setText(account.getUsername());
+        accountNameField.setText(account.getName());
+
+        String passwordHash = account.getPasswordHash();
+        String decryptPassword = AESCryptography.decryptPassword(passwordHash);
+        String maskPassword = maskPassword(decryptPassword);
+        passwordField.setText(maskPassword);
+
+        togglePass.setText("Show");
+        isPasswordVisible = false;
+
+        actualPassword = decryptPassword;
+    }
+
+    private void loadAccounts() {
+        ObservableList<User> accounts = FXCollections.observableArrayList(UserDB.users);
+        accountTableView.setItems(accounts);
+
+        // Refresh the table view
+        accountTableView.refresh();
+
+        accountTableView.getItems().clear();
+        accountTableView.getItems().addAll(UserDB.users);
+    }
+
+    @FXML
+    private void handleSearchAccount() {
+        String query = searchAccountField.getText().toLowerCase();
+        ObservableList<User> filteredList = FXCollections.observableArrayList();
+
+        for (User user : UserDB.users) {
+            if (user.getName().toLowerCase().contains(query)) {
+                filteredList.add(user);
+            }
+
+        }
+
+        accountTableView.setItems(filteredList);
+    }
+
+    @FXML
+    private void handleAddAccount() {
+        User u = new User();
+        u.setUserId(UserDB.users.size() + 1);
+        u.setName("Tài khoản " + (UserDB.users.size() + 1));
+        UserDB.users.add(u);
+
+        loadAccounts();
+    }
+
+    @FXML
+    private void handleDeleteAccount() {
+        User selectedAccount = accountTableView.getSelectionModel().getSelectedItem();
+        if (selectedAccount != null) {
+            UserDB.users.remove(selectedAccount);
+            loadAccounts();
+        }
+    }
+
+    @FXML
+    private void handleSaveAccount() throws Exception {
+        User selectedAccount = accountTableView.getSelectionModel().getSelectedItem();
+        if (selectedAccount != null) {
+            for (User user : UserDB.users) {
+                if (selectedAccount.getUserId() == user.getUserId()) {
+                    user.setUsername(accountUserNameField.getText());
+                    user.setName(accountNameField.getText());
+                    String password = passwordField.getText();
+                    String encryptPassword = AESCryptography.encryptPassword(password);
+                    user.setPasswordHash(encryptPassword);
+
+                    loadAccounts();
+
+                    // Reset the fields
+                    accountIdField.setText("");
+                    accountUserNameField.setText("");
+                    accountNameField.setText("");
+                    passwordField.setText("");
+                    togglePass.setText("Show");
+                    isPasswordVisible = false;
+                    saveAccountButton.setDisable(true);
+                    break;
+                }
+            }
         }
     }
 

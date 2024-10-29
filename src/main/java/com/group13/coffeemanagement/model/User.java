@@ -12,6 +12,9 @@ public class User implements Comparable<User> {
     private String passwordHash;
     private UserRole role = UserRole.NHANVIEN;
 
+    public User() {
+    }
+
     public User(String username, String passwordHash) {
         this.username = username;
         this.passwordHash = passwordHash;

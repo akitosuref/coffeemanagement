@@ -1,19 +1,19 @@
 {
-    "count": 2,
-    "users": [
-        {
-            "name": "Nguyen Van A",
-            "userId": 1,
-            "username": "admin",
-            "passwordHash": "iwBqV2yVK64KISnqUb374w==",
-            "role": "QUANLY"
-        },
-         {
-            "name": "Nguyen Nhan Vien",
-            "userId": 2,
-            "username": "nhanvien",
-            "passwordHash": "iwBqV2yVK64KISnqUb374w==",
-            "role": "NHANVIEN"
-        }
-    ]
+  "count": 2,
+  "users": [
+    {
+      "name": "Nguyen Van A",
+      "userId": 1,
+      "username": "admin",
+      "passwordHash": "0Ik93TcZiRU64VydSpzJ8g\u003d\u003d",
+      "role": "QUANLY"
+    },
+    {
+      "name": "Nguyen Nhan Vien",
+      "userId": 2,
+      "username": "nhanvien",
+      "passwordHash": "0Ik93TcZiRU64VydSpzJ8g\u003d\u003d",
+      "role": "NHANVIEN"
+    }
+  ]
 }
