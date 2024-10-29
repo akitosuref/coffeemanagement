@@ -4,9 +4,7 @@ import com.group13.coffeemanagement.App;
 import com.group13.coffeemanagement.database.UserDB;
 import com.group13.coffeemanagement.model.User;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
