@@ -96,6 +96,26 @@ public class AdminController {
     @FXML
     private TextField searchCategoryField;
 
+    // Bàn Tab
+
+    @FXML
+    private TableView<Table> tableView;
+
+    @FXML
+    private TableColumn<Table, Integer> tableIdCol;
+
+    @FXML
+    private TableColumn<Table, String> tableNameCol2;
+
+    @FXML
+    private TableColumn<Table, String> tableStatusCol;
+
+    @FXML
+    private TextField tableIdField;
+
+    @FXML
+    private TextField tableNameField;
+
     @FXML
     private Label messageUpdateDB;
 
@@ -163,6 +183,40 @@ public class AdminController {
             if (newSelection != null) {
                 messageUpdateDB.setText("");
                 populateCategoryFields(newSelection);
+            }
+        });
+
+        loadTables();
+
+        // Table code
+        tableIdCol.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        tableNameCol2
+                .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+
+        tableStatusCol
+                .setCellValueFactory(cellData -> {
+                    String statusText;
+                    switch (cellData.getValue().getStatus()) {
+                        case NO_USE:
+                            statusText = "Đang trống";
+                            break;
+                        case USED:
+                            statusText = "Đang sử dụng";
+                            break;
+                        default:
+                            statusText = "";
+                            break;
+                    }
+
+                    return new SimpleStringProperty(statusText);
+                });
+
+        // Set table selection listener
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                messageUpdateDB.setText("");
+                populateTableFields(newSelection);
             }
         });
 
@@ -434,7 +488,7 @@ public class AdminController {
     private void handleAddCategory() {
         Category c = new Category();
         c.setId(ShopDB.categories.size() + 1);
-        c.setName("Category " + (ShopDB.categories.size() + 1));
+        c.setName("Loại " + (ShopDB.categories.size() + 1));
         ShopDB.categories.add(c);
         loadCategories();
     }
@@ -454,6 +508,54 @@ public class AdminController {
         if (selectedCategory != null) {
             selectedCategory.setName(categoryNameField.getText());
             loadCategories();
+        }
+    }
+
+    // #endregion
+
+    // #region Bàn
+
+    private void loadTables() {
+        ObservableList<Table> tables = FXCollections.observableArrayList(ShopDB.tables);
+
+        tableView.setItems(tables);
+
+        // Refresh the table view
+        tableView.refresh();
+
+        tableView.getItems().clear();
+        tableView.getItems().addAll(ShopDB.tables);
+    }
+
+    private void populateTableFields(Table table) {
+        tableIdField.setText(String.valueOf(table.getId()));
+        tableNameField.setText(table.getName());
+    }
+
+    @FXML
+    private void handleAddTable() {
+        Table t = new Table();
+        t.setId(ShopDB.tables.size() + 1);
+        t.setName("Bàn " + (ShopDB.tables.size() + 1));
+        ShopDB.tables.add(t);
+        loadTables();
+    }
+
+    @FXML
+    private void handleDeleteTable() {
+        Table selectedTable = tableView.getSelectionModel().getSelectedItem();
+        if (selectedTable != null) {
+            ShopDB.tables.remove(selectedTable);
+            loadTables();
+        }
+    }
+
+    @FXML
+    private void handleSaveTable() {
+        Table selectedTable = tableView.getSelectionModel().getSelectedItem();
+        if (selectedTable != null) {
+            selectedTable.setName(tableNameField.getText());
+            loadTables();
         }
     }
 

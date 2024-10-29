@@ -8,6 +8,9 @@ public class Table {
     private String name;
     private TableStatus status = TableStatus.NO_USE;
 
+    public Table() {
+    }
+
     public Table(int id, String name, TableStatus status) {
         this.id = id;
         this.name = name;
@@ -37,8 +40,7 @@ public class Table {
     public void setStatus(TableStatus status) {
         this.status = status;
     }
-    
-    
+
     @Override
     public String toString() {
         return "Table{" + "name='" + name + '\'' + ", status=" + status + '}';
