@@ -16,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group13.coffeemanagement.controller.AdminController">
    <children>
-      <TabPane layoutX="214.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+      <TabPane layoutX="214.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="50.0">
         <tabs>
           <Tab text="Doanh Thu">
             <content>
@@ -113,12 +113,60 @@
                               <Button fx:id="deleteButton" layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteFood" prefHeight="30.0" prefWidth="86.0" text="Xóa" />
                            </children>
                         </HBox>
-                        <Button layoutX="748.0" layoutY="30.0" mnemonicParsing="false" onAction="#saveFoodDB" prefHeight="30.0" prefWidth="147.0" text="Cập nhật cơ sở dữ liệu" />
-                        <Label fx:id="messageUpdateDB" layoutX="748.0" layoutY="73.0" textFill="RED" />
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Danh mục">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="400.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
+                           <children>
+                              <TableView fx:id="categoryTableView" prefHeight="400.0" prefWidth="466.0">
+                                 <columns>
+                                    <TableColumn fx:id="categoryIdCol" prefWidth="47.19997787475586" text="ID" />
+                                    <TableColumn fx:id="categoryNameCol2" prefWidth="198.40003967285156" text="Tên" />
+                                 </columns>
+                              </TableView>
+                              <VBox layoutX="582.0" layoutY="14.0" prefHeight="248.0" prefWidth="280.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
+                                       <children>
+                                          <Label text="ID" />
+                                          <TextField fx:id="categoryIdField" editable="false" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
+                                       <children>
+                                          <Label text="Tên" />
+                                          <TextField fx:id="categoryNameField" promptText="Tên món" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#handleSaveCategory" text="Lưu" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="466.0" spacing="20.0">
+                           <children>
+                              <TextField fx:id="searchCategoryField" prefHeight="26.0" prefWidth="248.0" promptText="Tìm món ăn" />
+                              <Button mnemonicParsing="false" onAction="#handleSearchCategory" prefHeight="30.0" prefWidth="86.0" text="Tìm" />
+                              <Button mnemonicParsing="false" onAction="#handleAddCategory" prefHeight="30.0" prefWidth="86.0" text="Thêm" />
+                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteCategory" prefHeight="30.0" prefWidth="86.0" text="Xóa" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
+      <Button layoutX="15.0" layoutY="17.0" mnemonicParsing="false" onAction="#backtoMain" prefWidth="50.0" text="Back" />
+      <Button layoutX="812.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveShopDB" prefHeight="30.0" prefWidth="147.0" text="Cập nhật cơ sở dữ liệu" />
+      <Label fx:id="messageUpdateDB" alignment="CENTER_RIGHT" layoutX="585.0" layoutY="20.0" prefHeight="18.0" prefWidth="220.0" textAlignment="RIGHT" textFill="RED" />
    </children>
 </AnchorPane>

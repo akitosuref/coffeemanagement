@@ -4,3 +4,7 @@ target/
 # IntelliJ IDEA
 .idea/
 *.iml
+
+
+# Misc
+.vscode
