@@ -12,7 +12,7 @@ public class Bill {
     private boolean paid;
     private LocalDateTime orderDate;
     private LocalDateTime paidDate;
-    private long totalPrice;
+    private double totalPrice;
 
     public Bill() {
         id = OrderBillDB.bills.size() + 1;
@@ -69,11 +69,11 @@ public class Bill {
         this.disCount = disCount;
     }
 
-    public long getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

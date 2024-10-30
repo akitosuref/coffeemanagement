@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
 
 import com.group13.coffeemanagement.database.ShopDB;
+import com.group13.coffeemanagement.database.UserDB;
 import com.group13.coffeemanagement.enums.TableStatus;
 import com.group13.coffeemanagement.model.*;
 import java.text.NumberFormat;
@@ -69,8 +70,26 @@ public class MainScreenController implements Initializable {
 
 	private List<OrderItemView> orderItems = new ArrayList<>();
 
+	@FXML
+	private Button gotoAdminButton;
+
+	@FXML
+	private TextField discountField;
+
+	@FXML
+	private Button thanhToanButton;
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+
+		thanhToanButton.setDisable(true);
+
+		if (UserDB.isAdmin) {
+			gotoAdminButton.setDisable(false);
+		} else {
+			gotoAdminButton.setDisable(true);
+		}
+
 		loadTables();
 		loadFoods();
 		loadCategories();
@@ -86,12 +105,11 @@ public class MainScreenController implements Initializable {
 		});
 	}
 
+	@FXML
+	private void gotoAdminScreen() throws IOException {
 
-	 @FXML
-    private void gotoAdminScreen() throws IOException {
-
-        App.setRoot("adminScreen");
-    }
+		App.setRoot("adminScreen");
+	}
 
 	private void loadTables() {
 		for (Table table : ShopDB.tables) {
@@ -224,7 +242,7 @@ public class MainScreenController implements Initializable {
 		return newBill.getId();
 	}
 
-	private void updateOrderTable(int tableId) {
+	private double updateOrderTable(int tableId) {
 		for (Bill bill : OrderBillDB.bills) {
 			if (bill.getTableID() == tableId && !bill.isPaid()) {
 				// Get the order items related to this bill ID
@@ -234,18 +252,22 @@ public class MainScreenController implements Initializable {
 				// Update the TableView with the filtered order items
 				bangHoaDon.setItems(observableList);
 
+				bangHoaDon.refresh();
+
 				// Break the loop since we've found the matching bill
 				break;
 			}
 		}
 
-		long totalPriceLocal = 0;
+		double totalPriceLocal = 0;
 
 		for (OrderItemView orderItem : orderItems) {
 			totalPriceLocal += orderItem.getTotalPrice();
 		}
 
 		totalPrice.setText(convertToVND(totalPriceLocal));
+
+		return totalPriceLocal;
 	}
 
 	private List<OrderItemView> getOrderItemsForBill(int billId) {
@@ -307,37 +329,32 @@ public class MainScreenController implements Initializable {
 		});
 	}
 
-	// Populate TableView with data
-	private void populateOrderTable() {
-		ObservableList<OrderItemView> orderItems = FXCollections.observableArrayList(getOrderItems());
-		bangHoaDon.setItems(orderItems);
-	}
-
 	// Tao list hoa don view tu Orders va Foods
-	private List<OrderItemView> getOrderItems() {
-		List<OrderItemView> orderItemViews = new ArrayList<>();
+	// private List<OrderItemView> getOrderItems() {
+	// List<OrderItemView> orderItemViews = new ArrayList<>();
 
-		for (Order order : OrderBillDB.orders) {
-			Food foundFood = null;
+	// for (Order order : OrderBillDB.orders) {
+	// Food foundFood = null;
 
-			// Find the food by matching the ID in the foods list
-			for (Food food : ShopDB.foods) {
-				if (food.getId() == order.getFoodID()) {
-					foundFood = food;
-					break; // Exit the loop once the food is found
-				}
-			}
+	// // Find the food by matching the ID in the foods list
+	// for (Food food : ShopDB.foods) {
+	// if (food.getId() == order.getFoodID()) {
+	// foundFood = food;
+	// break; // Exit the loop once the food is found
+	// }
+	// }
 
-			// If food is found, create and add OrderItemView to the list
-			if (foundFood != null) {
-				OrderItemView itemView = new OrderItemView(foundFood.getName(), order.getCount(), foundFood.getPrice(),
-						foundFood.getId());
-				orderItemViews.add(itemView);
-			}
-		}
+	// // If food is found, create and add OrderItemView to the list
+	// if (foundFood != null) {
+	// OrderItemView itemView = new OrderItemView(foundFood.getName(),
+	// order.getCount(), foundFood.getPrice(),
+	// foundFood.getId());
+	// orderItemViews.add(itemView);
+	// }
+	// }
 
-		return orderItemViews; // Return the list of order item views
-	}
+	// return orderItemViews; // Return the list of order item views
+	// }
 
 	@FXML
 	public void addFood() {
@@ -357,6 +374,10 @@ public class MainScreenController implements Initializable {
 			return;
 		}
 
+		chosenBill = getBillIdByTableId(choseTable);
+
+		thanhToanButton.setDisable(false);
+
 		// Create a new Order entry
 		Order newOrder = new Order();
 		newOrder.setBillID(chosenBill);
@@ -365,16 +386,16 @@ public class MainScreenController implements Initializable {
 
 		// Add to order info list and update the display
 		OrderBillDB.orders.add(newOrder);
-		updateOrderTable(choseTable); // Refresh the table view
 
-		long totalPriceLocal = 0;
+		double totalPriceLocal = 0;
 
-		for (OrderItemView orderItem : orderItems) {
-			totalPriceLocal += orderItem.getTotalPrice();
-		}
+		totalPriceLocal = updateOrderTable(choseTable); // Refresh the table view
+
 		totalPrice.setText(convertToVND(totalPriceLocal));
+
 		System.out
-				.println("Added food ID: " + choseFood + " with quantity: " + quantity + " to table ID: " + choseTable);
+				.println("Added food ID: " + choseFood + " with quantity: " + quantity + " to table ID: " + choseTable
+						+ " with bill ID: " + chosenBill);
 	}
 
 	@FXML
@@ -386,10 +407,14 @@ public class MainScreenController implements Initializable {
 				for (Bill bill : OrderBillDB.bills) {
 					if (bill.getId() == chosenBill) {
 
-						long totalPriceLocal = 0;
+						double totalPriceLocal = 0;
 
-						for (OrderItemView orderItem : orderItems) {
-							totalPriceLocal += orderItem.getTotalPrice();
+						if (bill.getDisCount() > 0) {
+							totalPriceLocal = bill.getTotalPrice();
+						} else {
+							for (OrderItemView orderItem : orderItems) {
+								totalPriceLocal += orderItem.getTotalPrice();
+							}
 						}
 
 						bill.setPaid(true);
@@ -398,11 +423,12 @@ public class MainScreenController implements Initializable {
 					}
 				}
 
+				discountField.setText("0");
 				totalPrice.setText("0");
 
-				
-
 				bangHoaDon.getItems().clear();
+				
+				thanhToanButton.setDisable(true);
 
 				ShopDB.saveShopDB();
 				OrderBillDB.saveBill();
@@ -410,7 +436,31 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
-	private String convertToVND(long money) {
+	@FXML
+	public void apKhuyenMai() {
+		for (Bill bill : OrderBillDB.bills) {
+			if (bill.getId() == chosenBill) {
+
+				int discount = Integer.parseInt(discountField.getText());
+
+				bill.setDisCount(discount);
+
+				double totalPriceLocal = 0;
+
+				for (OrderItemView orderItem : orderItems) {
+					totalPriceLocal += orderItem.getTotalPrice();
+				}
+
+				double newTotalPrice = totalPriceLocal - (totalPriceLocal * (discount / 100.0));
+
+				bill.setTotalPrice(newTotalPrice);
+
+				totalPrice.setText(convertToVND(newTotalPrice));
+			}
+		}
+	}
+
+	private String convertToVND(double money) {
 		// Create a NumberFormat instance for VND
 		Locale vietnamLocale = Locale.forLanguageTag("vi-VN");
 
@@ -420,6 +470,12 @@ public class MainScreenController implements Initializable {
 		// Display the formatted currency
 		System.out.println("Formatted amount: " + vndFormat.format(money));
 		return vndFormat.format(money);
+	}
+
+	@FXML
+	private void gotoLoginScreen() throws IOException {
+		UserDB.isAdmin = false;
+		App.setRoot("login");
 	}
 
 }

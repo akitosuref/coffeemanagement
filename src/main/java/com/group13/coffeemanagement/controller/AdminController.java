@@ -34,7 +34,7 @@ public class AdminController {
     private TableColumn<Bill, Integer> discountCol;
 
     @FXML
-    private TableColumn<Bill, Long> totalPriceCol;
+    private TableColumn<Bill, Double> totalPriceCol;
 
     @FXML
     private TableColumn<Bill, String> orderDateCol;
@@ -172,7 +172,7 @@ public class AdminController {
         discountCol.setCellValueFactory(
                 cellData -> new SimpleIntegerProperty(cellData.getValue().getDisCount()).asObject());
         totalPriceCol.setCellValueFactory(
-                cellData -> new SimpleLongProperty(cellData.getValue().getTotalPrice()).asObject());
+                cellData -> new SimpleDoubleProperty(cellData.getValue().getTotalPrice()).asObject());
 
         orderDateCol.setCellValueFactory(cellData -> {
             LocalDate orderDate = cellData.getValue().getOrderDate().toLocalDate();
@@ -373,11 +373,11 @@ public class AdminController {
         this.discountCol = discountCol;
     }
 
-    public TableColumn<Bill, Long> getTotalPriceCol() {
+    public TableColumn<Bill, Double> getTotalPriceCol() {
         return totalPriceCol;
     }
 
-    public void setTotalPriceCol(TableColumn<Bill, Long> totalPriceCol) {
+    public void setTotalPriceCol(TableColumn<Bill, Double> totalPriceCol) {
         this.totalPriceCol = totalPriceCol;
     }
 

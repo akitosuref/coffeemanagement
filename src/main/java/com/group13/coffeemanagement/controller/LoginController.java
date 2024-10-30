@@ -2,6 +2,7 @@ package com.group13.coffeemanagement.controller;
 
 import com.group13.coffeemanagement.App;
 import com.group13.coffeemanagement.database.UserDB;
+import com.group13.coffeemanagement.enums.UserRole;
 import com.group13.coffeemanagement.model.User;
 import java.io.IOException;
 import java.util.List;
@@ -52,6 +53,11 @@ public class LoginController {
         for (User u : users) {
             if (u.getUsername().equals(username)) {
                 if (u.checkPassword(password)) {
+
+                    if (u.getRole() == UserRole.QUANLY) {
+                        UserDB.isAdmin = true;
+                    }
+
                     return true;
                 }
             }

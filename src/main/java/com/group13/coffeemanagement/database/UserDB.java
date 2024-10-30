@@ -17,6 +17,8 @@ public class UserDB {
     public static int count = 0;
     public static List<User> users = new ArrayList<>();
 
+    public static boolean isAdmin = false;
+
     private static final String FILE_PATH = "users.json";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
