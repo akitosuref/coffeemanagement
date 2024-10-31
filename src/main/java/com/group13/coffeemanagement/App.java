@@ -36,7 +36,7 @@ public class App extends Application {
                 scene.getWindow().setHeight(400);
                 break;
             case "mainScreen":
-                scene.getWindow().setWidth(1000);
+                scene.getWindow().setWidth(1050);
                 scene.getWindow().setHeight(650);
                 break;
             case "adminScreen":

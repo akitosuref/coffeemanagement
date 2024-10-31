@@ -134,7 +134,7 @@ public class MainScreenController implements Initializable {
 			ToggleButton b = new ToggleButton();
 			b.setToggleGroup(foodBtbGroup);
 			b.setText(food.getName());
-			b.setPrefWidth(80);
+			b.setPrefWidth(100);
 			b.setPrefHeight(80);
 			b.setWrapText(true);
 			b.setUserData(food.getId());
@@ -216,11 +216,9 @@ public class MainScreenController implements Initializable {
 		for (Table table : ShopDB.tables) {
 			if (table.getId() == tableId) {
 				if (table.getStatus() == TableStatus.USED) {
-					messageTableLabel.setText("Ban " + tableId + " co nguoi!");
-					messageTableLabel.setStyle("-fx-text-fill: red;");
-					System.out.println("Ban " + tableId + " co nguoi!");
+					messageTableLabel.setText("Bàn " + tableId + " có khách!");
 				} else {
-					messageTableLabel.setText("Ban trong");
+					messageTableLabel.setText("Bàn đang trống");
 				}
 			}
 		}
@@ -230,16 +228,8 @@ public class MainScreenController implements Initializable {
 				return bill.getId();
 			}
 		}
-		// Tao hoa don moi neu ban khong co nguoi
-		Bill newBill = new Bill();
-		newBill.setTableID(tableId);
-		newBill.setDisCount(0);
-		newBill.setTotalPrice(0);
-		OrderBillDB.bills.add(newBill);
 
-		System.out.println("BILL ID " + newBill.getId());
-		// totalPrice.setText(convertToVND(totalPriceLocal));
-		return newBill.getId();
+		return 0;
 	}
 
 	private double updateOrderTable(int tableId) {
@@ -256,6 +246,8 @@ public class MainScreenController implements Initializable {
 
 				// Break the loop since we've found the matching bill
 				break;
+			} else {
+				bangHoaDon.getItems().clear();
 			}
 		}
 
@@ -358,10 +350,6 @@ public class MainScreenController implements Initializable {
 
 	@FXML
 	public void addFood() {
-		// Get selected category and quantity
-		// Category selectedCategory =
-		// categoryChoiceBox.getSelectionModel().getSelectedItem();
-
 		Integer quantity = quantitySpinner.getValue();
 
 		// Check da chon table va chon food
@@ -378,6 +366,27 @@ public class MainScreenController implements Initializable {
 
 		thanhToanButton.setDisable(false);
 
+		// Tao hoa don moi neu ban khong co khach
+		if (chosenBill == 0) {
+			Bill newBill = new Bill();
+			newBill.setTableID(choseTable);
+			newBill.setDisCount(0);
+			newBill.setTotalPrice(0);
+			OrderBillDB.bills.add(newBill);
+
+			chosenBill = newBill.getId();
+
+			for (Table table : ShopDB.tables) {
+				if (table.getId() == choseTable) {
+					table.setStatus(TableStatus.USED);
+					messageTableLabel.setText("Bàn " + choseTable + " có khách!");
+					break;
+				}
+			}
+
+			System.out.println("New Bill: ID = " + newBill.getId());
+		}
+
 		// Create a new Order entry
 		Order newOrder = new Order();
 		newOrder.setBillID(chosenBill);
@@ -393,9 +402,14 @@ public class MainScreenController implements Initializable {
 
 		totalPrice.setText(convertToVND(totalPriceLocal));
 
+		quantitySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
+
 		System.out
 				.println("Added food ID: " + choseFood + " with quantity: " + quantity + " to table ID: " + choseTable
 						+ " with bill ID: " + chosenBill);
+
+		updateOrderTable(choseTable);
+
 	}
 
 	@FXML
@@ -427,7 +441,7 @@ public class MainScreenController implements Initializable {
 				totalPrice.setText("0");
 
 				bangHoaDon.getItems().clear();
-				
+
 				thanhToanButton.setDisable(true);
 
 				ShopDB.saveShopDB();

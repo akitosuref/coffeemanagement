@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group13.coffeemanagement.controller.AdminController">
    <children>
@@ -23,7 +24,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="443.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleViewButton" prefHeight="40.0" prefWidth="81.0" text="Xem" />
+                        <Button layoutX="443.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleViewButton" prefHeight="40.0" prefWidth="81.0" style="-fx-background-color: #e5b78d;" text="Xem" />
                         <VBox alignment="CENTER" layoutX="89.0" layoutY="14.0" prefHeight="80.0" prefWidth="331.0">
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -61,7 +62,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="400.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
+                        <AnchorPane prefHeight="400.0" prefWidth="920.0" style="-fx-background-color: #e5b78d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
                            <children>
                               <TableView fx:id="foodTableView" prefHeight="400.0" prefWidth="466.0">
                                 <columns>
@@ -97,11 +98,11 @@
                                           <Spinner fx:id="priceSpinner" editable="true" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
-                                       <children>
-                                          <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSaveFood" text="Lưu" />
-                                       </children>
-                                    </HBox>
+                                    <Button fx:id="saveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveFood" style="-fx-background-color: #a97550;" text="Lưu" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="16.0" />
+                                       </font>
+                                    </Button>
                                  </children>
                               </VBox>
                            </children>
@@ -109,9 +110,9 @@
                         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="466.0" spacing="20.0">
                            <children>
                               <TextField fx:id="searchField" prefHeight="26.0" prefWidth="248.0" promptText="Tìm món ăn" />
-                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearchFood" prefHeight="30.0" prefWidth="86.0" text="Tìm" />
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddFood" prefHeight="30.0" prefWidth="86.0" text="Thêm" />
-                              <Button fx:id="deleteButton" layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteFood" prefHeight="30.0" prefWidth="86.0" text="Xóa" />
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearchFood" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Tìm" />
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddFood" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Thêm" />
+                              <Button fx:id="deleteButton" layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteFood" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Xóa" />
                            </children>
                         </HBox>
                      </children></AnchorPane>
@@ -121,7 +122,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="400.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
+                        <AnchorPane prefHeight="400.0" prefWidth="920.0" style="-fx-background-color: #e5b78d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
                            <children>
                               <TableView fx:id="categoryTableView" prefHeight="400.0" prefWidth="466.0">
                                  <columns>
@@ -143,11 +144,11 @@
                                           <TextField fx:id="categoryNameField" promptText="Tên món" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#handleSaveCategory" text="Lưu" />
-                                       </children>
-                                    </HBox>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveCategory" style="-fx-background-color: #a97550;" text="Lưu" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="16.0" />
+                                       </font>
+                                    </Button>
                                  </children>
                               </VBox>
                            </children>
@@ -155,9 +156,9 @@
                         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="466.0" spacing="20.0">
                            <children>
                               <TextField fx:id="searchCategoryField" prefHeight="26.0" prefWidth="248.0" promptText="Tìm món ăn" />
-                              <Button mnemonicParsing="false" onAction="#handleSearchCategory" prefHeight="30.0" prefWidth="86.0" text="Tìm" />
-                              <Button mnemonicParsing="false" onAction="#handleAddCategory" prefHeight="30.0" prefWidth="86.0" text="Thêm" />
-                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteCategory" prefHeight="30.0" prefWidth="86.0" text="Xóa" />
+                              <Button mnemonicParsing="false" onAction="#handleSearchCategory" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Tìm" />
+                              <Button mnemonicParsing="false" onAction="#handleAddCategory" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Thêm" />
+                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteCategory" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Xóa" />
                            </children>
                         </HBox>
                      </children>
@@ -166,9 +167,9 @@
             </Tab>
             <Tab text="Bàn">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-image: #e5b78d;">
                      <children>
-                        <AnchorPane prefHeight="400.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
+                        <AnchorPane prefHeight="400.0" prefWidth="920.0" style="-fx-background-color: #e5b78d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
                            <children>
                               <TableView fx:id="tableView" prefHeight="400.0" prefWidth="466.0">
                                  <columns>
@@ -191,19 +192,19 @@
                                           <TextField fx:id="tableNameField" promptText="Tên bàn" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#handleSaveTable" text="Lưu" />
-                                       </children>
-                                    </HBox>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveTable" style="-fx-background-color: #a97550;" text="Lưu" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="16.0" />
+                                       </font>
+                                    </Button>
                                  </children>
                               </VBox>
                            </children>
                         </AnchorPane>
                         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="466.0" spacing="20.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleAddTable" prefHeight="30.0" prefWidth="86.0" text="Thêm" />
-                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteTable" prefHeight="30.0" prefWidth="86.0" text="Xóa" />
+                              <Button mnemonicParsing="false" onAction="#handleAddTable" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Thêm" />
+                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteTable" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Xóa" />
                            </children>
                         </HBox>
                      </children>
@@ -214,7 +215,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="400.0" prefWidth="920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
+                        <AnchorPane prefHeight="400.0" prefWidth="920.0" style="-fx-background-color: #e5b78d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
                            <children>
                               <TableView fx:id="accountTableView" editable="true" layoutY="-5.0" prefHeight="400.0" prefWidth="489.0">
                                  <columns>
@@ -260,14 +261,17 @@
                                                 <Insets right="10.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <Button fx:id="togglePass" maxWidth="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleTogglePass" prefHeight="26.0" prefWidth="50.0" text="Show" />
+                                          <Button fx:id="togglePass" minWidth="60.0" mnemonicParsing="false" onAction="#handleTogglePass" prefHeight="26.0" style="-fx-background-color: #a97550;" text="Show" textFill="WHITE">
+                                             <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                             </font></Button>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
-                                       <children>
-                                          <Button fx:id="saveAccountButton" mnemonicParsing="false" onAction="#handleSaveAccount" text="Lưu" />
-                                       </children>
-                                    </HBox>
+                                    <Button fx:id="saveAccountButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaveAccount" style="-fx-background-color: #a97550;" text="Lưu" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="16.0" />
+                                       </font>
+                                    </Button>
                                  </children>
                               </VBox>
                            </children>
@@ -275,9 +279,9 @@
                         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="466.0" spacing="20.0">
                            <children>
                               <TextField fx:id="searchAccountField" prefHeight="26.0" prefWidth="248.0" promptText="Tìm tài khoản" />
-                              <Button mnemonicParsing="false" onAction="#handleSearchAccount" prefHeight="30.0" prefWidth="86.0" text="Tìm" />
-                              <Button mnemonicParsing="false" onAction="#handleAddAccount" prefHeight="30.0" prefWidth="86.0" text="Thêm" />
-                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteAccount" prefHeight="30.0" prefWidth="86.0" text="Xóa" />
+                              <Button mnemonicParsing="false" onAction="#handleSearchAccount" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Tìm" />
+                              <Button mnemonicParsing="false" onAction="#handleAddAccount" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Thêm" />
+                              <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleDeleteAccount" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Xóa" />
                            </children>
                         </HBox>
                      </children>
@@ -286,8 +290,22 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="15.0" layoutY="17.0" mnemonicParsing="false" onAction="#backtoMain" prefWidth="50.0" text="Back" />
-      <Button layoutX="812.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveDB" prefHeight="30.0" prefWidth="147.0" text="Cập nhật cơ sở dữ liệu" />
-      <Label fx:id="messageUpdateDB" alignment="CENTER_RIGHT" layoutX="585.0" layoutY="20.0" prefHeight="18.0" prefWidth="220.0" textAlignment="RIGHT" textFill="RED" />
+      <HBox layoutY="14.0" style="-fx-background-color: #906d55;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#backtoMain" prefWidth="50.0" style="-fx-background-color: #e5b78d;" text="Back" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="messageUpdateDB" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="220.0" textAlignment="RIGHT" textFill="RED" />
+            <Button mnemonicParsing="false" onAction="#saveDB" style="-fx-background-color: #e5b78d;" text="Cập nhật cơ sở dữ liệu" />
+         </children>
+         <padding>
+            <Insets right="10.0" top="10.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>
