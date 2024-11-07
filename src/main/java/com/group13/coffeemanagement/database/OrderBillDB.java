@@ -37,7 +37,10 @@ public class OrderBillDB {
             }.getType();
             OrderBillDBData data = gson.fromJson(reader, shopDBType);
 
-            // Assign loaded data to static fields
+            if (data == null) {
+                return;
+            }
+
             bills = data.bills;
             orders = data.orders;
 
@@ -46,7 +49,6 @@ public class OrderBillDB {
         }
     }
 
-    // Inner static class to represent the structure of data in the JSON file
     private static class OrderBillDBData {
 
         List<Bill> bills;

@@ -43,6 +43,10 @@ public class UserDB {
 
             UserDBData data = gson.fromJson(reader, userDBType);
 
+            if (data == null) {
+                return;
+            }
+
             count = data.count;
             users = data.users;
 

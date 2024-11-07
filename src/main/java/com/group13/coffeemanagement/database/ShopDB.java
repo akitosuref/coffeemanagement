@@ -15,18 +15,14 @@ import java.util.List;
 
 public class ShopDB {
 
-    // Public static fields to store data (accessible globally)
     public static List<Table> tables = new ArrayList<>();
     public static List<Food> foods = new ArrayList<>();
     public static List<Category> categories = new ArrayList<>();
 
-    // Constants
     private static final String FILE_PATH = "shop_data.json";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    // Private constructor to prevent instantiation
     private ShopDB() {
-        // This ensures no one creates an object of ShopDB, but the class can be accessed directly.
     }
 
     // Save the current state of ShopDB to JSON
@@ -45,7 +41,10 @@ public class ShopDB {
             Type shopDBType = new TypeToken<ShopDBData>() {}.getType();
             ShopDBData data = gson.fromJson(reader, shopDBType);
 
-            // Assign loaded data to static fields
+            if (data == null) {
+                return;
+            }
+
             tables = data.tables;
             foods = data.foods;
             categories = data.categories;
@@ -55,13 +54,11 @@ public class ShopDB {
         }
     }
 
-    // Inner static class to represent the structure of data in the JSON file
     private static class ShopDBData {
         List<Table> tables;
         List<Food> foods;
         List<Category> categories;
 
-        // Constructor to initialize the inner class with data
         public ShopDBData(List<Table> tables, List<Food> foods, List<Category> categories) {
             this.tables = tables;
             this.foods = foods;
