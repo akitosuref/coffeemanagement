@@ -8,6 +8,7 @@ public class Food {
     private String name;
     private long price;
     private int categoryId;
+    private String imgName;
 
     public Food(String name, long price, int categoryId) {
         this.name = name;
@@ -63,9 +64,18 @@ public class Food {
         return getCategory().getName();
     }
 
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
+    }
+
     @Override
     public String toString() {
-        return "Food{" + "id=" + id + ", name='" + name + '\'' + ", price=" + price + ", categoryId=" + categoryId + '}';
+        return "Food{" + "id=" + id + ", name='" + name + '\'' + ", price=" + price + ", categoryId=" + categoryId
+                + '}';
     }
-    
+
 }

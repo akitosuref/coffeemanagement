@@ -154,3 +154,10 @@ Nhân viên:
 2. **Xuất hóa đơn**: In hóa đơn.
 
 ---
+
+
+## 10. Quick Deploy
+
+```bash
+python .\build_and_copy.py
+```

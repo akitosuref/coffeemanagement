@@ -6,7 +6,10 @@ import java.net.URL;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import com.group13.coffeemanagement.database.ShopDB;
 import com.group13.coffeemanagement.database.UserDB;
@@ -23,7 +26,10 @@ import java.time.LocalDateTime;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainScreenController implements Initializable {
@@ -79,6 +85,8 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Button thanhToanButton;
 
+	private List<ImageView> imageViews = new ArrayList<>();
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
@@ -131,16 +139,46 @@ public class MainScreenController implements Initializable {
 
 	private void loadFoods() {
 		for (Food food : ShopDB.foods) {
+			VBox vBox = new VBox();
+
+			vBox.setPrefWidth(100);
+			vBox.setPrefHeight(100);
+			vBox.setAlignment(Pos.CENTER);
+
+			StackPane stackPane = new StackPane();
+
+			ImageView imageView = new ImageView();
+			imageView.setFitWidth(100);
+			imageView.setFitHeight(100);
+
+			imageViews.add(imageView);
+
+			File imageFile = new File("images/" + food.getImgName());
+
+			System.out.println(imageFile.toURI().toString());
+
+			Image image = new Image(imageFile.toURI().toString());
+
+			imageView.setImage(image);
+
 			ToggleButton b = new ToggleButton();
 			b.setToggleGroup(foodBtbGroup);
-			b.setText(food.getName());
+			b.setPrefHeight(100);
 			b.setPrefWidth(100);
-			b.setPrefHeight(80);
-			b.setWrapText(true);
+			b.setOpacity(0);
 			b.setUserData(food.getId());
-			b.setOnAction(event -> chonFood(event));
+			b.setOnAction(event -> chonFood(event, imageView));
 
-			danhSachMon.getChildren().add(b);
+			stackPane.getChildren().add(imageView);
+			stackPane.getChildren().add(b);
+
+			vBox.getChildren().add(stackPane);
+
+			Label label = new Label(food.getName());
+			label.setWrapText(true);
+			vBox.getChildren().add(label);
+
+			danhSachMon.getChildren().add(vBox);
 
 		}
 		System.out.println("So luong mon: " + danhSachMon.getChildren());
@@ -162,25 +200,64 @@ public class MainScreenController implements Initializable {
 						.filter(food -> food.getCategoryId() == selectedCategory.getId())
 						.collect(Collectors.toList());
 
+		imageViews.clear();
+
 		// Create buttons for each food item and add to FlowPane
 		for (Food food : foodsToDisplay) {
-			ToggleButton b = new ToggleButton();
-			b.setText(food.getName());
-			b.setPrefWidth(80);
-			b.setPrefHeight(80);
-			b.setWrapText(true);
-			b.setUserData(food.getId());
-			b.setOnAction(event -> chonFood(event));
+			VBox vBox = new VBox();
 
-			danhSachMon.getChildren().add(b);
+			vBox.setPrefWidth(100);
+			vBox.setPrefHeight(100);
+			vBox.setAlignment(Pos.CENTER);
+
+			StackPane stackPane = new StackPane();
+
+			ImageView imageView = new ImageView();
+			imageView.setFitWidth(100);
+			imageView.setFitHeight(100);
+
+			imageViews.add(imageView);
+
+			File imageFile = new File("images/" + food.getImgName());
+
+			System.out.println(imageFile.toURI().toString());
+
+			Image image = new Image(imageFile.toURI().toString());
+
+			imageView.setImage(image);
+
+			ToggleButton b = new ToggleButton();
+			b.setToggleGroup(foodBtbGroup);
+			b.setPrefHeight(100);
+			b.setPrefWidth(100);
+			b.setOpacity(0);
+			b.setUserData(food.getId());
+			b.setOnAction(event -> chonFood(event, imageView));
+
+			stackPane.getChildren().add(imageView);
+			stackPane.getChildren().add(b);
+
+			vBox.getChildren().add(stackPane);
+
+			Label label = new Label(food.getName());
+			label.setWrapText(true);
+			vBox.getChildren().add(label);
+
+			danhSachMon.getChildren().add(vBox);
 		}
 		System.out.println("So luong mon: " + danhSachMon.getChildren());
 	}
 
 	@FXML
-	public void chonFood(javafx.event.ActionEvent event) {
+	public void chonFood(javafx.event.ActionEvent event, ImageView imageView) {
 		// Lấy button được clicked
 		ToggleButton clickedButton = (ToggleButton) event.getSource();
+
+		for (ImageView imgV : imageViews) {
+			imgV.setOpacity(1);
+		}
+
+		imageView.setOpacity(0.5);
 
 		// Lấy data (food id) từ button được click
 		int foodID = (int) clickedButton.getUserData();
