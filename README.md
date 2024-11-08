@@ -116,15 +116,16 @@ Nhân viên:
 ## 7. Chức năng
 
 1. [x] **Thêm/sửa/xóa món ăn**.
-2. [ ] **Them sửa/xoa danh mục món ăn**.
-3. [ ] **Quản lý users**.
-2. [ ] **Thêm/sửa/xóa bàn**.
+2. [x] **Them sửa/xoa danh mục món ăn**.
+3. [x] **Quản lý users**.
+2. [x] **Thêm/sửa/xóa bàn**.
 3. [x] **Đặt món**: Thêm món vào bàn.
 4. [x] **Quản lý hóa đơn**: Tạo, xem.
-5. [ ] **Tìm kiếm** món ăn theo từ khóa.
+5. [x] **Tìm kiếm** món ăn theo từ khóa.
 6. [x] **Sắp xếp** món ăn theo tên hoặc giá.
 7. [x] **Xem chi tiết hóa đơn**: Hiển thị danh sách món của từng hóa đơn.
 8. [x] **Thanh toán**: Tính tổng tiền và cập nhật trạng thái bàn.
+9. [x] **Import Ảnh cho món ăn**.
 
 ---
 
