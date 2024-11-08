@@ -1,0 +1,48 @@
+{
+  "bills": [
+    {
+      "id": 1,
+      "tableID": 1,
+      "disCount": 0,
+      "paid": true,
+      "orderDate": "2024-11-08T17:59:55",
+      "paidDate": "2024-11-08T18:00:00",
+      "totalPrice": 70000.0
+    },
+    {
+      "id": 2,
+      "tableID": 2,
+      "disCount": 20,
+      "paid": true,
+      "orderDate": "2024-11-08T18:00:07",
+      "paidDate": "2024-11-08T18:00:16",
+      "totalPrice": 112000.0
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "billID": 1,
+      "foodID": 1,
+      "count": 1
+    },
+    {
+      "id": 2,
+      "billID": 1,
+      "foodID": 5,
+      "count": 2
+    },
+    {
+      "id": 3,
+      "billID": 2,
+      "foodID": 3,
+      "count": 2
+    },
+    {
+      "id": 4,
+      "billID": 2,
+      "foodID": 6,
+      "count": 2
+    }
+  ]
+}

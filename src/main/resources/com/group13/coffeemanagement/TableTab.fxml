@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.group13.coffeemanagement.controller.TableTabController">
+    <children>
+        <AnchorPane prefHeight="400.0" prefWidth="920.0" style="-fx-background-color: #e5b78d;"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            AnchorPane.topAnchor="91.0">
+            <children>
+                <TableView fx:id="tableView" prefHeight="400.0" prefWidth="466.0">
+                    <columns>
+                        <TableColumn fx:id="tableIdCol" prefWidth="47.19997787475586" text="ID" />
+                        <TableColumn fx:id="tableNameCol2" prefWidth="198.40003967285156" text="Tên" />
+                        <TableColumn fx:id="tableStatusCol" prefWidth="198.40003967285156"
+                            text="Status" />
+                    </columns>
+                </TableView>
+                <VBox layoutX="582.0" layoutY="14.0" prefHeight="248.0" prefWidth="280.0">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="280.0" spacing="100.0">
+                            <children>
+                                <Label text="ID" />
+                                <TextField fx:id="tableIdField" editable="false" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="44.0"
+                            prefWidth="280.0" spacing="100.0">
+                            <children>
+                                <Label text="Tên" />
+                                <TextField fx:id="tableNameField" promptText="Tên bàn" />
+                            </children>
+                        </HBox>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                            onAction="#handleSaveTable" style="-fx-background-color: #a97550;"
+                            text="Lưu" textFill="WHITE">
+                            <font>
+                                <Font name="Calibri Bold" size="16.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="466.0" spacing="20.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAddTable" prefHeight="30.0"
+                    prefWidth="86.0" style="-fx-background-color: #e5b78d;" text="Thêm" />
+                <Button layoutX="228.0" layoutY="34.0" mnemonicParsing="false"
+                    onAction="#handleDeleteTable" prefHeight="30.0" prefWidth="86.0"
+                    style="-fx-background-color: #e5b78d;" text="Xóa" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

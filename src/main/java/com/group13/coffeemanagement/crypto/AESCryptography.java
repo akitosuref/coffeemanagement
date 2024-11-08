@@ -2,7 +2,6 @@ package com.group13.coffeemanagement.crypto;
 
 import java.nio.charset.StandardCharsets;
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
@@ -24,7 +23,7 @@ public class AESCryptography {
     // Hàm giải mã mật khẩu
     public static String decryptPassword(String encryptedPassword) throws Exception {
         Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE,getKeyFromString(secret));
+        cipher.init(Cipher.DECRYPT_MODE, getKeyFromString(secret));
         byte[] decodedBytes = Base64.getDecoder().decode(encryptedPassword);
         byte[] decryptedBytes = cipher.doFinal(decodedBytes);
         return new String(decryptedBytes);

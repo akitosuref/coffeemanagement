@@ -10,16 +10,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
+
+        // UserDB.isAdmin = true;
         scene = new Scene(loadFXML("login"));
         stage.setScene(scene);
         stage.setTitle("Coffee Management");
@@ -27,9 +25,9 @@ public class App extends Application {
     }
 
     public static void setRoot(String fxml) throws IOException {
-         Parent root = loadFXML(fxml);
+        Parent root = loadFXML(fxml);
         scene.setRoot(root);
-        
+
         switch (fxml) {
             case "login":
                 scene.getWindow().setWidth(600);
@@ -54,7 +52,7 @@ public class App extends Application {
                 scene.getWindow().setHeight(400);
                 break;
         }
-        
+
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
@@ -67,8 +65,8 @@ public class App extends Application {
         ShopDB.loadShopDB();
         UserDB.loadUserDB();
         OrderBillDB.loadBill();
-        System.out.println("Loaded Tables:" +ShopDB.tables);
-        System.out.println("Loaded Users: " + UserDB.users);
+        // System.out.println("Loaded Tables:" + ShopDB.tables);
+        // System.out.println("Loaded Users: " + UserDB.users);
 
         launch();
     }
