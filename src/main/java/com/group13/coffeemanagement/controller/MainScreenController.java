@@ -134,7 +134,7 @@ public class MainScreenController implements Initializable {
 
 			danhSachBan.getChildren().add(b);
 		}
-		System.out.println("So luong ban: " + danhSachBan.getChildren());
+		System.out.println("So luong ban: " + danhSachBan.getChildren().size());
 	}
 
 	private void loadFoods() {
@@ -154,8 +154,6 @@ public class MainScreenController implements Initializable {
 			imageViews.add(imageView);
 
 			File imageFile = new File("images/" + food.getImgName());
-
-			System.out.println(imageFile.toURI().toString());
 
 			Image image = new Image(imageFile.toURI().toString());
 
@@ -181,7 +179,7 @@ public class MainScreenController implements Initializable {
 			danhSachMon.getChildren().add(vBox);
 
 		}
-		System.out.println("So luong mon: " + danhSachMon.getChildren());
+		System.out.println("So luong mon: " + danhSachMon.getChildren().size());
 	}
 
 	private void loadCategories() {
