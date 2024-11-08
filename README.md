@@ -158,8 +158,14 @@ Nhân viên:
 
 ## 10. Dev and Deploy
 
-### Chay development
+### Chạy development
 
+- NetBeans 23
+- JDK 23
+
+`Open Project -> Run Project (F6)`
+
+hoặc từ terminal
 ```bash
 mvn clean javafx:run
 ```

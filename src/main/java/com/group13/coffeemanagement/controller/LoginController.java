@@ -34,8 +34,7 @@ public class LoginController {
         if (checkPassword(username, password)) {
             messageLabel.setText("Login successful!");
             messageLabel.setStyle("-fx-text-fill: green;");
-            
-            
+
             try {
                 gotoView();
             } catch (IOException e) {
