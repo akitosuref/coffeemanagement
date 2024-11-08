@@ -156,8 +156,16 @@ Nhân viên:
 ---
 
 
-## 10. Quick Deploy
+## 10. Dev and Deploy
 
+### Chay development
+
+```bash
+mvn clean javafx:run
+```
+
+### Chạy deploy
+- Xoá CoffeeManagement folder trước khi chạy (nếu có)
 ```bash
 python .\build_and_copy.py
 ```

@@ -37,17 +37,11 @@ public class App extends Application {
                 scene.getWindow().setWidth(1050);
                 scene.getWindow().setHeight(650);
                 break;
-            case "adminScreen":
+            case "AdminScreen":
                 scene.getWindow().setWidth(1000);
                 scene.getWindow().setHeight(650);
                 break;
-            case "settings":
-                scene.getWindow().setWidth(600);
-                scene.getWindow().setHeight(400);
-                break;
-            // Add more cases as needed for other FXML files
             default:
-                // Set default size if fxml doesn't match any case
                 scene.getWindow().setWidth(600);
                 scene.getWindow().setHeight(400);
                 break;

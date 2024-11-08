@@ -116,7 +116,7 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private void gotoAdminScreen() throws IOException {
 
-		App.setRoot("adminScreen");
+		App.setRoot("AdminScreen");
 	}
 
 	private void loadTables() {
